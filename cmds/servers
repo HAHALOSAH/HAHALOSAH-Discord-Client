@@ -1,0 +1,10 @@
+#!/usr/bin/python3
+import json
+exec(open("servers.py").read())
+f = open("servers.json", "r")
+servers = json.loads(f.read())
+f.close()
+print("You are currently in "+str(len(servers))+" servers:")
+for i in range(len(servers)):
+  server = servers[i];
+  print("    \""+server["name"]+"\", ID: "+server["id"])

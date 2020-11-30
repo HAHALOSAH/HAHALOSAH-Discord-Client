@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+confirmal = input("Confirm display of access token. This gives FULL ACCESS to your account to anyone who has it. Please type yes, or no: > ")
+if confirmal == "yes" or confirmal == "Yes" or confirmal == "YES":
+  print(open("token.txt").read())
+else:
+  print("Abort.")

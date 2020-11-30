@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+import requests
+import json
+f = open("token.txt", "r")
+token = f.read()
+f.close()
+if parama == "channels":
+  exec(open("cmds/channels").read())
+elif parama == "servers":
+  exec(open("cmds/servers").read())
+elif parama == "messages":
+  exec(open("cmds/messages").read())
+else:
+  if len(args) != 2:
+    print("This command takes 2 arguments. " + str(len(args)) + " was supplied.")
+  else:
+    print("You can list servers, messages, or channels of a server.")

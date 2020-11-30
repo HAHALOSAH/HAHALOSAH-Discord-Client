@@ -1,0 +1,17 @@
+#!/usr/bin/python
+print("Basic commands:")
+print("  help:      Show this help menu")
+print("  servers:   List the servers you are in")
+print("  block:     Block a user")
+print("  unblock:   Unblock a user")
+print("  friend:    Send/accept a friend request")
+print("  unfriend:  Remove friend")
+print("  join:      Join server with an invite code")
+print("  leave:     Leave a server")
+print("  select:    Select a server/channel")
+print("  create:    Creates a resource")
+print("  delete:    Delectes a resource")
+print("  send:      Send a message")
+print("  messages:  Retrieve last 50 messages")
+print("  logout:    Log out")
+

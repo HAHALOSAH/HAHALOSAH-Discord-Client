@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+import requests
+import json
+
+if selectedchannel == "":
+  print("Select a channel first! >>> select channel <ID>")
+if selectedserver != "":
+  headers = { "Authorization":"{}".format(token), "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like  Gecko) Chrome/51.0.2704.103 Safari/537.36","Content-Type": "application/json"}
+  baseURL = "https://discordapp.com/api/channels/{}/typing".format(selectedchannel)
+  r = requests.post(baseURL, headers = headers);
+  baseURL = "https://discordapp.com/api/v8/channels/{}/messages".format(selectedchannel)
+  headers = { "Authorization":"{}".format(token),
+            "User-Agent":"myBotThing (http://some.url, v0.1)",
+            "Content-Type":"application/json"}
+  if len(args) == 1:
+    try:
+      message = input("Send a message> ")
+    except KeyboardInterrupt:
+      print()
+  else:
+    message = args[1]
+  try:
+    POSTedJSON =  json.dumps ( {"content":message} )
+    r = requests.post(baseURL, headers = headers, data = POSTedJSON)
+    message = ""
+  except Exception:
+    print()

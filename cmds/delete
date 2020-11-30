@@ -1,0 +1,45 @@
+#!/usr/bin/python3
+if parama == "server":
+  if paramb != "":
+    baseURL = "https://discordapp.com/api/v8/guilds/" + paramb + "/delete";
+    headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+                "Content-Type":"application/json"}
+    POSTedJSON = json.dumps({})
+    r = requests.post(baseURL, headers = headers, data = POSTedJSON)
+  
+    #print(r.status_code)
+    if r.status_code == 204:
+      print("Server deleted. OLD ID: " + server["id"])
+      if selectedserver == server["id"]:
+        selectedserver = "";
+    elif r.status_code == 403:
+      print("Error 403: " + json.loads(r.text)["message"])
+    else:
+      print("Error " + str(r.status_code) + ": " + r.text)
+  else:
+    print("This command takes 3 arguments. " + str(len(args)) + " was supplied.")
+elif parama == "textchannel" or parama == "voicechannel" or parama == "channel":
+  if selectedserver != "":
+    baseURL = "https://discordapp.com/api/v8/channels/" + paramb;
+    headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+                "Content-Type":"application/json"}
+    POSTedJSON = json.dumps({})
+    r = requests.delete(baseURL, headers = headers, data = POSTedJSON)
+    
+    #print(r.status_code)
+    if r.status_code == 200:
+      channel = json.loads(r.text)
+      print("Channel "+channel["name"]+" deleted. OLD ID: " + channel["id"])
+      if selectedchannel == channel["id"]:
+        selectedchannel = "";
+    elif r.status_code == 403:
+      print("Error 403: " + json.loads(r.text)["message"])
+    else:
+      print("Error " + str(r.status_code) + ": " + r.text)
+  else:
+    print("Select a server first! >>> select server <id>")
+elif len(args) != 3:
+  print("This command takes 3 arguments. " + str(len(args)) + " was supplied.")
+
+exec(open("servers.py").read())
+exec(open("update-info.py").read())

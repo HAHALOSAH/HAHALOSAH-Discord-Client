@@ -1,0 +1,10 @@
+#!/usr/bin/python3
+if len(args) == 3:
+  if parama == "server":
+    selectedserver = paramb
+  elif parama == "channel":
+    selectedchannel = paramb
+  else:
+    print("Unknown type " + parama)
+else:
+  print("This command takes 3 arguments. " + str(len(args)) + " was supplied.")

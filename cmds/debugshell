@@ -1,0 +1,9 @@
+#!/usr/bin/python
+while(1):
+  cmd = input("debug> ");
+  if cmd == "exit":
+    break
+  try:
+    exec(cmd);
+  except Exception as err:
+    print("Uncaught " + type(err).__name__ + ": " + str(err))

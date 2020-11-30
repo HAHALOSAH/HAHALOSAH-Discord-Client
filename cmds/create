@@ -1,0 +1,60 @@
+#!/usr/bin/python3
+if parama == "server":
+  if paramb != "":
+    baseURL = "https://discordapp.com/api/v8/guilds";
+    headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+                "Content-Type":"application/json"}
+    POSTedJSON = json.dumps({"name":paramb,"icon":None,"channels":[],"system_channel_id":None,"guild_template_code":"2TffvPucqHkN"})
+    r = requests.post(baseURL, headers = headers, data = POSTedJSON)
+  
+    #print(r.status_code)
+    if r.status_code == 201:
+      server = json.loads(r.text)
+      print("Server created. ID: " + server["id"])
+    elif r.status_code == 403:
+      print("Error 403: " + json.loads(r.text)["message"])
+    else:
+      print("Error " + str(r.status_code) + ": " + r.text)
+  else:
+    print("This command takes 3 arguments. " + str(len(args)) + " was supplied.")
+elif parama == "textchannel":
+  if selectedserver != "":
+    baseURL = "https://discordapp.com/api/v8/guilds/" + selectedserver + "/channels";
+    headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+                "Content-Type":"application/json"}
+    POSTedJSON = json.dumps({"name":paramb,"permission_overwrites": [], "type": 0})
+    r = requests.post(baseURL, headers = headers, data = POSTedJSON)
+  
+    #print(r.status_code)
+    if r.status_code == 201:
+      channel = json.loads(r.text)
+      print("Text channel created. ID: " + channel["id"])
+    elif r.status_code == 403:
+      print("Error 403: " + json.loads(r.text)["message"])
+    else:
+      print("Error " + str(r.status_code) + ": " + r.text)
+  else:
+    print("Select a server first! >>> select server <id>")  
+elif parama == "voicechannel":
+  if selectedserver != "":
+    baseURL = "https://discordapp.com/api/v8/guilds/" + selectedserver + "/channels";
+    headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+                "Content-Type":"application/json"}
+    POSTedJSON = json.dumps({"name":paramb,"permission_overwrites": [], "type": 0})
+    r = requests.post(baseURL, headers = headers, data = POSTedJSON)
+  
+    #print(r.status_code)
+    if r.status_code == 201:
+      channel = json.loads(r.text)
+      print("Voice channel created. ID: " + channel["id"])
+    elif r.status_code == 403:
+      print("Error 403: " + json.loads(r.text)["message"])
+    else:
+      print("Error " + str(r.status_code) + ": " + r.text)
+  else:
+    print("Select a server first! >>> select server <id>")  
+elif len(args) != 3:
+  print("This command takes 3 arguments. " + str(len(args)) + " was supplied.")
+
+exec(open("servers.py").read())
+exec(open("update-info.py").read())

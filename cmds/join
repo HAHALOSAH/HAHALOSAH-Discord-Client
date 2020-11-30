@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import requests
+import json
+if len(args) == 2:
+  f = open("token.txt", "r")
+  token = f.read()
+  f.close()
+  baseURL = "https://discordapp.com/api/v8/invites/" + parama;
+  headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+              "Content-Type":"application/json"}
+  POSTedJSON = json.dumps({})
+  r = requests.post(baseURL, headers = headers, data = POSTedJSON)
+  #print(r.status_code)\
+  if r.status_code == 204:
+    print("Server joined!")
+  elif r.status_code == 403:
+    print("Error 403: " + json.loads(r.text)["message"])
+  else:
+    print("Error " + str(r.status_code) + ": " + r.text)
+else:
+  print("This command takes 2 arguments. " + str(len(args)) + " was supplied.")
+
+exec(open("servers.py").read())
+exec(open("update-info.py").read())

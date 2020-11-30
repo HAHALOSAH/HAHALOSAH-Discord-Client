@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+import requests
+import json
+if selectedserver != "":
+  baseURL = "https://discordapp.com/api/v8/guilds/{}/members".format(selectedserver)
+  headers = { "Authorization":"{}".format(token),
+            "User-Agent":"myBotThing (http://some.url, v0.1)",
+            "Content-Type":"application/json"}
+
+  r = requests.get(baseURL, headers = headers)
+  if r.status_code == 200:
+    members = json.loads(r.text)
+    for i in range(len(members)):
+      member = members[len(members) - (i + 1)];
+      print("    \""+member["user"]["username"]+"\" ID: "+member["user"]["id"])
+  elif r.status_code == 403:
+    print("Error 403: " + json.loads(r.text)["message"])
+  else:
+    print("Error " + str(r.status_code) + ": " + r.text)
+else:
+  print("Select a server first! >>> select server <ID>")

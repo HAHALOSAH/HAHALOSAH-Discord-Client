@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+import requests
+import json
+if selectedchannel != "":
+  baseURL = "https://discordapp.com/api/v8/channels/{}/messages?limit=50".format(selectedchannel)
+  headers = { "Authorization":"{}".format(token),
+            "User-Agent":"myBotThing (http://some.url, v0.1)",
+            "Content-Type":"application/json"}
+
+  r = requests.get(baseURL, headers = headers)
+  if r.status_code == 200:
+    messages = json.loads(r.text)
+    for i in range(len(messages)):
+      message = messages[len(messages) - (i + 1)];
+      print(eval("\""+message["author"]["username"]+"\"")+": \""+message["content"]+"\" ID: "+message["id"])
+  elif r.status_code == 403:
+    print("Error 403: " + json.loads(r.text)["message"])
+  else:
+    print("Error " + str(r.status_code) + ": " + r.text)

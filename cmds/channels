@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+if selectedserver != "":
+  baseURL = "https://discordapp.com/api/v8/guilds/" + selectedserver + "/channels"
+  headers = { "Authorization": token, "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like  Gecko) Chrome/51.0.2704.103 Safari/537.36"}
+  r = requests.get(baseURL, headers = headers)
+  channels = json.loads(r.text)
+  if r.status_code == 200:
+    print("This server has "+str(len(channels))+" channels:")
+    for i in range(len(channels)):
+      channel = channels[i];
+      if channel["type"] == 0:
+        channeltype = "Text"
+      if channel["type"] == 2:
+        channeltype = "Voice"
+      if channel["type"] == 4:
+        channeltype = "Category"
+      if channel["type"] == 5:
+        channeltype = "Announcements"
+      print("    \""+channel["name"]+"\", Type: "+channeltype+", ID: "+channel["id"])
+  else:
+    print("Error " + str(r.status_code) + ": " + r.text)
+else:
+  print("Select a server first! >>> select server <id>")
